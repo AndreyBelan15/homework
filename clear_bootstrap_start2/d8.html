@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Заголовок</title>
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="libs/bootstrap/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/media.css">
+</head>
+<body>
+
+<div class="contanier">
+    <div class="row">
+        <form>
+            <div class="mb-3">
+                <label for="userNumber" class="form-label">Введите символ</label>
+                <input type="number" class="form-control" id="userNumber">
+            </div>
+            <button type="button" id="btnStart" class="btn btn-primary">ОпределитьСимвол</button>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div id="result">
+
+    </div>
+</div>
+
+<script>
+    let result = document.getElementById("result")
+
+    document.getElementById("btnStart").onclick = function () {
+        result.innerText = "Пользователь щелкнул на кнопку"
+        let userNumber = document.getElementById("userNumber").value
+        console.log("Пользователь ввел" + userNumber)
+
+        let capital = prompt('Столица Украины? 1 - Мухосранск 2 - Николаев 3 - Киев');
+        let currency = prompt('Какая валюта Украины? 1 - Зеленые 2 - Кровные 3 - Рубасики');
+        let country = prompt('Что у нас отжали? 1 - Велик 2 - Мопед 3 - Крым');
+        let score = 0;
+        if (capital == 3)
+            score += 2;
+        if (currency == 2)
+            score += 2;
+        if (country == 3)
+            score += 2;
+        alert('Твои не поломанные пальцы ' + score);
+    }
+</script>
+<script src="libs/jquery/jquery-3.6.0.min.js"></script>
+<script src="libs/bootstrap/js/bootstrap.bundle.js"></script>
+<script src="libs/bootstrap/js/bootstrap.js"></script>
+</body>
+</html>

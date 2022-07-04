@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkbox</title>
+</head>
+<style>
+  .gradient-button {
+    width: 114px;
+    text-decoration: none;
+    display: inline-block;
+    color: white;
+    padding: 13px 0px;
+    margin: 10px 11px;
+    border: none;
+    border-radius: 25px;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    background-image: linear-gradient(to right, #9EEFE1 0%, #4830F0 51%, #9EEFE1 100%);
+    background-size: 200% auto;
+    box-shadow: 0 0 20px rgb(0 0 0 / 10%);
+    transition: .5s;
+  }
+  .gradient-button:focus{
+    outline:0
+  }
+  .gradient-button:hover {
+    background-position: right center;
+  }
+  .material{
+    color:#6A04A4
+  }
+  .freeShipping{
+    color:#4004A4
+  }
+  .gender{
+    color:#1004A4
+  }
+  .size{
+    color:#0426A4
+  }
+  .color{
+    color: #044DA4;
+  }
+  .render{
+    display: flex;
+
+  }
+  #products,.btn-render{
+    margin-left: 40px;
+  }
+  p{
+    margin-left: 40px;
+    font-family: Arial;
+    font-size: 20px;
+    color: midnightblue;
+  }
+  li{
+    list-style-type: none;
+    font-family: Arial;
+  }
+</style>
+<body>
+<p>Filters:</p>
+<div class="render">
+  <aside id="filters"></aside>
+  <div id="products"></div>
+</div>
+<div class="btn-render">
+  <input type="button" onclick="reset()" class="gradient-button" value="Reset Color" id="resetColor">
+  <input type="button" onclick="reset()" class="gradient-button" value="Reset Size" id="resetSize">
+  <input type="button" onclick="reset()" class="gradient-button" value="Reset Gender" id="resetGender">
+  <input type="button" onclick="reset()" class="gradient-button" value="Reset Free" id="resetFree">
+  <input type="button" onclick="reset()" class="gradient-button" value="Reset Material" id="resetMaterial">
+  <input type="button" onclick="checkAll3()" class="gradient-button" value="Check All">
+  <button id="button" class="button gradient-button" value="Reset" >Reset</button>
+</div>
+<script src="guid.js"></script>
+<script>
+  // Коллекции (справочники) характеристик (атрибутов) товара
+  let sizes = ['small', 'medium', 'large', 'xlarge', 'xxlarge']
+  let colors = ['white', 'gray', 'pink','red','yellow','orange']
+  let gender = ['man', 'woman', 'child']
+  let  freeShipping = ['free', 'notFree']
+  let  material = ['cotton', 'jeans','satin','polyester']
+  // Массив для передачи данных о фильтрации
+  let filteredBy = []
+  filteredBy['sizeMany']= []
+  filteredBy['colorMany']= []
+  filteredBy['genderMany']= []
+  filteredBy['freeShippingMany']= []
+  filteredBy['materialMany']= []
+  let products = [
+    {
+      id: generateUUID(),
+      name: "Shirt",
+      size:sizes[1],
+      color: colors[5],
+      gender: gender[1],
+      freeShipping: freeShipping[0],
+      material:material[0],
+      description: "Nice summer dress"
+    },
+    {
+      id: generateUUID(),
+      name: "Dress",
+      size:sizes[0],
+      color: colors[3],
+      gender: gender[1],
+      freeShipping: freeShipping[0],
+      material:material[0],
+      description: "Nice summer dress"
+    },
+    {
+      id: generateUUID(),
+      name: "Skirt",
+      size:sizes[4],
+      color: colors[1],
+      gender: gender[2],
+      freeShipping: freeShipping[1],
+      material:material[3],
+      description: "Nice summer skirt"
+    },
+    {
+      id: generateUUID(),
+      name: "Jeans",
+      size:sizes[2],
+      color: colors[0],
+      gender: gender[0],
+      freeShipping: freeShipping[0],
+      material:material[1],
+      description: "Nice summer jeans"
+    },
+  ]
+  console.log(products)
+
+  function renderFilers() {
+    let asize = document.getElementById("filters")
+    let ulS = document.createElement("ul")
+
+    colors.map(el=> {
+      let li = document.createElement("li")
+      let inp = document.createElement("input")
+      li.className="color"
+      inp.type = 'checkbox'
+      inp.name = 'colors'
+      inp.id = 'color'
+      inp.value = el
+      inp.onchange = (ev) => {
+        let el = filteredBy['colorMany'].findIndex(f => {
+          return f === ev.target.value})
+        console.log(el)
+        if (el !== -1) {
+          filteredBy['colorMany'].splice(el,1)
+        } else {
+          filteredBy['colorMany'].push(ev.target.value)
+        }
+        console.log(filteredBy)
+        renderProducts()
+      }
+
+      let label = document.createElement("label")
+      label.innerText = el
+
+      li.appendChild(inp)
+      li.appendChild(label)
+
+      ulS.appendChild(li)
+    })
+    sizes.map(el=> {
+      let li = document.createElement("li")
+      let inp = document.createElement("input")
+      inp.type ='checkbox'
+      li.className="size"
+      inp.name = 'sizes'
+      inp.id = 'size'
+      inp.value = el
+      inp.onchange = (ev) => {
+        let el = filteredBy['sizeMany'].findIndex(f => {
+          return f === ev.target.value})
+        console.log(el)
+        if (el !== -1) {
+          filteredBy['sizeMany'].splice(el,1)
+        } else {
+          filteredBy['sizeMany'].push(ev.target.value)
+        }
+        console.log(filteredBy)
+        renderProducts()
+      }
+      let label = document.createElement("label")
+      label.innerText = el
+      li.appendChild(inp)
+      li.appendChild(label)
+      ulS.appendChild(li)
+    })
+
+    gender.map(el=> {
+      let li = document.createElement("li")
+      let inp = document.createElement("input")
+      inp.type = 'checkbox'
+      inp.name = 'gender'
+      li.className="gender"
+      inp.id = 'gender'
+      inp.value = el
+      inp.onchange = (ev) => {
+        let el = filteredBy['genderMany'].findIndex(f => {
+          return f === ev.target.value})
+        console.log(el)
+        if (el !== -1) {
+          filteredBy['genderMany'].splice(el,1)
+        } else {
+          filteredBy['genderMany'].push(ev.target.value)
+        }
+        console.log(filteredBy)
+        renderProducts()
+      }
+
+      let label = document.createElement("label")
+      label.innerText = el
+
+      li.appendChild(inp)
+      li.appendChild(label)
+
+      ulS.appendChild(li)
+    })
+
+    freeShipping.map(el=> {
+      let li = document.createElement("li")
+      let inp = document.createElement("input")
+      inp.type = 'checkbox'
+      inp.id = 'shipping'
+      li.className="freeShipping"
+      inp.name = 'freeShipping'
+      for(let i=0;i< products.valueOf();i++){
+        inp.id = 'textInput3'+i
+      }
+
+      inp.value = el
+      inp.onchange = (ev) => {
+        let el = filteredBy['freeShippingMany'].findIndex(f => {
+          return f === ev.target.value})
+        console.log(el)
+        if (el !== -1) {
+          filteredBy['freeShippingMany'].splice(el,1)
+        } else {
+          filteredBy['freeShippingMany'].push(ev.target.value)
+        }
+        console.log(filteredBy)
+        renderProducts()
+      }
+
+      let label = document.createElement("label")
+      label.innerText = el
+
+      li.appendChild(inp)
+      li.appendChild(label)
+
+      ulS.appendChild(li)
+    })
+
+    material.map(el=> {
+      let li = document.createElement("li")
+      let inp = document.createElement("input")
+      let span =document.createElement("span")
+      inp.id = 'material'
+      inp.type = 'checkbox'
+      li.className="material"
+      inp.name = 'material'
+      inp.value = el
+      inp.onchange = (ev) => {
+        let el = filteredBy['materialMany'].findIndex(f => {
+          return f === ev.target.value})
+        console.log(el)
+        if (el !== -1) {
+          filteredBy['materialMany'].splice(el,1)
+        } else {
+          filteredBy['materialMany'].push(ev.target.value)
+        }
+        console.log(filteredBy)
+        renderProducts()
+      }
+
+      let label = document.createElement("label")
+      label.innerText = el
+
+      li.appendChild(inp)
+      li.appendChild(label)
+
+      ulS.appendChild(li)
+    })
+    asize.appendChild(ulS)
+  }
+  renderFilers()
+
+  function renderProducts(){
+    let main = document.getElementById("products")
+    let ul = document.createElement("ul")
+    products.map(product => {
+      if(filteredBy['sizeMany'].length > 0) {
+        let inFilter = false
+        for(let i = 0; i < filteredBy['sizeMany'].length; i++){
+          if(product.size === filteredBy['sizeMany'][i]) {
+            inFilter = true
+            break
+          }
+        }
+        if(!inFilter) return
+      }
+      if(filteredBy['colorMany'].length > 0) {
+        let inFilter = false
+        for(let i = 0; i < filteredBy['colorMany'].length; i++){
+          if(product.color === filteredBy['colorMany'][i]) {
+            inFilter = true
+            break
+          }
+        }
+        if(!inFilter) return
+      }
+      if(filteredBy['genderMany'].length > 0) {
+        let inFilter = false
+        for(let i = 0; i < filteredBy['genderMany'].length; i++){
+          if(product.gender === filteredBy['genderMany'][i]) {
+            inFilter = true
+            break
+          }
+        }
+        if(!inFilter) return
+      }
+      if(filteredBy['freeShippingMany'].length > 0) {
+        let inFilter = false
+        for(let i = 0; i < filteredBy['freeShippingMany'].length; i++){
+          if(product.freeShipping === filteredBy['freeShippingMany'][i]) {
+            inFilter = true
+            break
+          }
+        }
+        if(!inFilter) return
+      }
+      if(filteredBy['materialMany'].length > 0) {
+        let inFilter = false
+        for(let i = 0; i < filteredBy['materialMany'].length; i++){
+          if(product.material === filteredBy['materialMany'][i]) {
+            inFilter = true
+            break
+          }
+        }
+        if(!inFilter) return
+      }
+      let li = document.createElement("li")
+      li.dataset.id = product.id
+      li.innerText = product.name + " ( Size: " + product.size + "  Color: " + product.color+"  Gender: "+product.gender+"  Shipping: "+product.freeShipping+"  Material: "+product.material+" )"
+      ul.appendChild(li)
+    })
+    main.innerHTML = ''
+    main.appendChild(ul)
+  }
+  renderProducts()
+
+  document.getElementById("button").onclick = function checkAll() {
+    let inputs = document.querySelectorAll('input');
+    for (let i = 0; i < inputs.length; i++) {
+      inputs[i].checked = false;
+    }
+  }
+  //reset colors
+  document.getElementById("resetColor").onclick = function reset() {
+    let inputs = document.querySelectorAll('#color');
+    for (let i = 0; i < inputs.length; i++) {
+      inputs[i].checked = false;
+    }
+  }
+  //reset size
+  document.getElementById("resetSize").onclick = function reset() {
+    let inputs = document.querySelectorAll('#size');
+    for (let i = 0; i < inputs.length; i++) {
+      inputs[i].checked = false;
+    }
+  }
+  //reset size
+  document.getElementById("resetGender").onclick = function reset() {
+    let inputs = document.querySelectorAll('#gender');
+    for (let i = 0; i < inputs.length; i++) {
+      inputs[i].checked = false;
+    }
+  }
+  //reset free or not free
+  document.getElementById("resetFree").onclick = function reset() {
+    let inputs = document.querySelectorAll('#shipping');
+    for (let i = 0; i < inputs.length; i++) {
+      inputs[i].checked = false;
+    }
+  }
+  //reset free or not free
+  document.getElementById("resetMaterial").onclick = function reset() {
+    let inputs = document.querySelectorAll('#material');
+    for (let i = 0; i < inputs.length; i++) {
+      inputs[i].checked = false;
+    }
+  }
+  function checkAll3() {
+    let inputs = document.querySelectorAll('input');
+    for(let i = 0; i < inputs.length; i++) {
+      inputs[i].checked = true;
+    }
+  }
+
+</script>
+
+</body>
+</html>

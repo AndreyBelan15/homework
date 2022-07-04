@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /* Описание авто */
+     /**
+     first variant
+      */
+        .car {
+            display: block; width: 1130px; height: 460px;
+            background-image: url("img/day-exterior-5_2QJ_EC20.jpg");}
+
+        .white {background-image: url("img/day-exterior-5_2QJ_EC20.jpg");display: block; width: 1130px; height: 460px;}
+        .plumb {background-image: url("img/day-exterior-5_2QY_EC20.jpg");display: block; width: 1130px; height: 460px;}
+        .gray {background-image: url("img/day-exterior-5_2QZ_EC20.jpg");display: block; width: 1130px; height: 460px;}
+        .blue {background-image: url("img/day-exterior-5_2RA_EC20.jpg");display: block; width: 1130px; height: 460px;}
+
+        /**
+        second variant
+         */
+        #carColorsUl li {display: flex; width: 100px; height: 100px; border: 1px solid gray;
+                        background-position: center center; background-repeat: no-repeat;}
+        #carColorsUl li:hover { background-size: 110%;}
+        ul, #carPhoto{display: inline-block;}
+    </style>
+</head>
+<body>
+<div id="Toyota" class="car">
+    <select id="selectColors"></select>
+</div>
+    <ul id="carColorsUl"></ul>
+    <div id="carPhoto"></div>
+<script src="guid.js"></script>
+<script>
+
+     /**
+      * first variant
+      */
+    let arrColors = ['white','plumb','gray','blue']
+
+    //  Список colors
+    function buildSelectByClass() {
+        let s = document.getElementById("selectColors")
+        for(let i = 0; i < arrColors.length; i++) {
+            let o = document.createElement("option")
+            o.value = arrColors[i]
+            o.innerText = arrColors[i]
+            s.appendChild(o)
+        }
+    }
+
+
+     let ToyotaDiv = document.getElementById("Toyota")
+
+     // Смена цвета через селект
+      document.getElementById("selectColors").onchange = function () {
+         ToyotaDiv.className = document.getElementById("selectColors").value
+     }
+
+     /**
+      * second variant
+      */
+
+     let arrColorsToyota = [
+         {name:"Белый", imgModel:"day-exterior-5_2QJ_EC20.jpg", imgUrl:"white(2QJ).jpg",id: generateUUID()},
+         {name:"Синий", imgModel:"day-exterior-5_2RA_EC20.jpg", imgUrl:"blue(2RA).jpg",id: generateUUID()},
+         {name:"Серый", imgModel:"day-exterior-5_2QZ_EC20.jpg", imgUrl:"gray(2QY).jpg",id: generateUUID()},
+         {name:"Серебро",imgModel:"day-exterior-5_2QY_EC20.jpg", imgUrl:"plumb(2QZ).jpg",id: generateUUID()}
+     ]
+
+     function renderColorsLi(){
+         let ul = document.getElementById("carColorsUl")
+         arrColorsToyota.map( color => {
+             let li = document.createElement("li")
+             li.dataset.id = color.id
+             li.dataset.imgModel = color.imgModel
+             li.style.backgroundImage = "url('img/" + color.imgUrl+"')"
+             li.title = color.name
+
+             li.onclick = (ev)=> {
+                 let img = document.createElement("img")
+                 img.src = 'img/' + ev.target.dataset.imgModel
+                 let divImg = document.getElementById("carPhoto")
+                 divImg.innerHTML =''
+                 divImg.appendChild(img)
+             }
+             ul.appendChild(li)
+         })
+     }
+     renderColorsLi()
+     buildSelectByClass()
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="btnReload"> Reload </button>
+<div id="main">
+
+</div>
+
+<script>
+    let randomRes = document.getElementById('main')
+
+
+    /**
+     * Получение данных о фотографии
+     */
+    function apiGetRandomDog() {
+        fetch('https://random.dog/woof.json')
+            .then( res => res.json())
+            .then( dog => {
+                console.log(dog)
+                randomRes.innerHTML = ''
+                if (dog.url.includes('mp4')){
+                    console.log('video')
+                }
+                else {
+                    console.log('img')
+                    let img = document.createElement('img')
+                    img.src = dog.url
+                    randomRes.append(img)
+
+                }
+            })
+            .catch(err => {
+                console.log('Err')
+                console.log(err)
+            })
+    }
+
+    apiGetRandomDog()
+
+    document.getElementById('btnReload').onclick = function () {
+        apiGetRandomDog()
+    }
+
+</script>
+
+</body>
+</html>

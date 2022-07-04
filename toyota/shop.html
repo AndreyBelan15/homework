@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<aside id="filters"></aside>
+
+  <div id="products"></div>
+  <button id="btn" type="reset" >Delete</button>
+
+
+<script src="guid.js"></script>
+
+<script>
+  // Коллекции растений
+  let views = ['куст', 'дерево', 'хвойное', 'листопадное', 'вечнозеленое'] //вид
+  let growths = ['50', '100', '100+']                                      //рост
+  let variety = ['decorative', 'fruit']                                   //декоративное, плодовое
+
+  // Массив для данных
+  let filteredBy = []
+  let products = [
+    { id: generateUUID(), name: "Барбарис", view: views[0], growth: growths[0], varietys: variety[0],},
+    { id: generateUUID(), name: "Катальпа", view: views[1], growth: growths[2], varietys: variety[0],},
+    { id: generateUUID(), name: "Туя",      view: views[2], growth: growths[1], varietys: variety[0],},
+    { id: generateUUID(), name: "Падуб",    view: views[4], growth: growths[1], varietys: variety[0],},
+    { id: generateUUID(), name: "Яблоня",   view: views[1], growth: growths[2], varietys: variety[1],}
+  ]
+
+  function renderFilers() {
+    let asize = document.getElementById("filters")
+    let ulS = document.createElement("ul")
+
+    let liDefault = document.createElement("li")
+    let inp = document.createElement("input")
+    inp.type = 'radio'
+    inp.name = 'views'
+    inp.value = 'all'
+    inp.checked = true
+    inp.onchange = (ev) => {
+      console.log(ev.target.value)
+      filteredBy['viewOne'] = null
+      renderProducts()
+    }
+    let labelDefault = document.createElement("label")
+    labelDefault.innerText = "Каталог"
+    liDefault.appendChild(inp)
+    liDefault.appendChild(labelDefault)
+    ulS.appendChild(liDefault)
+
+    views.map(el=> {
+      let li = document.createElement("li")
+      li.style.border = '1px solid red'
+
+      let inp = document.createElement("input")
+      inp.type = 'radio'
+      inp.name = 'views'
+      inp.value = el
+      inp.onchange = (ev) => {
+        console.log(ev.target.value)
+        filteredBy['viewOne'] = ev.target.value
+        renderProducts()
+      }
+      let label = document.createElement("label")
+      label.innerText = el
+      li.appendChild(inp)
+      li.appendChild(label)
+      ulS.appendChild(li)
+    })
+    asize.appendChild(ulS)
+  }
+  renderFilers()
+
+
+  function renderProducts(){
+    let main = document.getElementById("products")
+    let ul = document.createElement("ul")
+
+    // 2 Вариант фильтрации
+    let productForOut = products
+    if(filteredBy['viewOne']) {
+      productForOut = productForOut.filter(product =>{
+        return product.view === filteredBy['viewOne']
+      })
+    }
+    if(filteredBy['growth']) {
+      productForOut = productForOut.filter(product =>{
+        return product.growth === filteredBy['growthOne']
+      })
+    }
+    if(filteredBy['varietyOne']) {
+      productForOut = productForOut.filter(product =>{
+        return product.varietys === filteredBy['varietyOne']
+      })
+    }
+
+    productForOut.map(product => {
+      let li = document.createElement("li")
+      li.dataset.id = product.id
+      li.innerText = product.name + " " + product.view + " " + product.growth + " " + product.varietys
+      ul.appendChild(li)
+    })
+    main.innerHTML = ''
+    main.appendChild(ul)
+  }
+  renderProducts()
+
+    document.getElementById("btn").onclick = function (){
+    document.getElementById("products").innerHTML = ''
+  }
+
+
+</script>
+
+</body>
+</html>
