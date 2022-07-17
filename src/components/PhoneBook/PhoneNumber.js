@@ -1,8 +1,8 @@
+//Подключение модуля реакт
 import React from "react";
 
 //Создание компонента (тут будет меняться только название)
-class AndreyInputsEmail extends React.Component {
-
+class PhoneNumber extends React.Component {
 
     constructor(props) {
         super(props);
@@ -11,32 +11,27 @@ class AndreyInputsEmail extends React.Component {
             err: []
         }
     }
-
     onChange(ev){
         this.checkValid(ev)
         if(this.props.onChange){
             this.props.onChange(ev)
         }
     }
-
     checkValid(ev){
-        let email = ev.target.value
+        let numb = ev.target.value
         let err = []
 
-        //регулярки на валидацию
-        //цифры
+         let inSum = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/ //Регулярка для телефона
+        // /^([+]?[0-9\s-\(\)]{3,25})*$/i
+        // /(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?/
+        // /^\+?[99][-\(]?\d{3}\)?-?\d{3}-?\d{2}-?\d{2}$/
 
-        //большие буквы
-        let isUpper =/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/
-        if(email.length < 8){
-            err.push('Короткий пароль')
+        if(numb.length < 13){
+            err.push('Номер должен содержать больше символов')
         }
-
-
-        if(!isUpper.test(email)){
-            err.push('пароль должен содержать латиницу буквы')
+        if(!inSum.test(numb)){
+            err.push('Номер должен состоять из цифр  и начинаться с +')
         }
-
 
         let oldState = this.state;
         if (err.length>0){
@@ -46,14 +41,9 @@ class AndreyInputsEmail extends React.Component {
         }
         oldState.err = err
         this.setState(oldState)
-
-
     }
-
-
-
     render() {
-        let err = '<-- сюда мыло'
+        let err = ''
         if(!this.state.isValid){
             err = (
 
@@ -71,17 +61,22 @@ class AndreyInputsEmail extends React.Component {
             label = (<label>{this.props.label}</label>)
         }
 
-
         return(
             <div>
                 {label}
-                <input type ="Email" onChange={this.onChange.bind(this)}/>
+                <label>Number<input type ="text" onChange={this.onChange.bind(this)}/></label>
                 {err}
             </div>
         )
     }
+
+
+    // render() {
+    //     return(
+    //         <div>
+    //             <label><input type="text"/>Number</label>
+    //         </div>
+    //     )
+    // }
 }
-
-
-
-export default AndreyInputsEmail
+export default PhoneNumber;

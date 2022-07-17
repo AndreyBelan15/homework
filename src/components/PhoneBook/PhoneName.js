@@ -1,8 +1,8 @@
+//Подключение модуля реакт
 import React from "react";
 
 //Создание компонента (тут будет меняться только название)
-class AndreyInputsEmail extends React.Component {
-
+class PhoneName extends React.Component {
 
     constructor(props) {
         super(props);
@@ -11,32 +11,23 @@ class AndreyInputsEmail extends React.Component {
             err: []
         }
     }
-
     onChange(ev){
         this.checkValid(ev)
         if(this.props.onChange){
             this.props.onChange(ev)
         }
     }
-
     checkValid(ev){
-        let email = ev.target.value
+        let name = ev.target.value
         let err = []
 
-        //регулярки на валидацию
-        //цифры
-
-        //большие буквы
-        let isUpper =/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/
-        if(email.length < 8){
-            err.push('Короткий пароль')
+        let isUpper = /^[А-ЯЁ][а-яё]+$/ //Регулярка на заглавную букву
+        if(name.length < 2){
+            err.push('Имя должно содержать больше символов')
         }
-
-
-        if(!isUpper.test(email)){
-            err.push('пароль должен содержать латиницу буквы')
+        if(!isUpper.test(name)){
+            err.push('Имя должно начинаться с большой буквы')
         }
-
 
         let oldState = this.state;
         if (err.length>0){
@@ -46,14 +37,9 @@ class AndreyInputsEmail extends React.Component {
         }
         oldState.err = err
         this.setState(oldState)
-
-
     }
-
-
-
     render() {
-        let err = '<-- сюда мыло'
+        let err = ''
         if(!this.state.isValid){
             err = (
 
@@ -75,13 +61,19 @@ class AndreyInputsEmail extends React.Component {
         return(
             <div>
                 {label}
-                <input type ="Email" onChange={this.onChange.bind(this)}/>
+                <label>Name<input type ="text" onChange={this.onChange.bind(this)}/></label>
                 {err}
             </div>
         )
     }
+
+
+    // render() {
+    //     return(
+    //         <div>
+    //             <label><input type="text"/>Name</label>
+    //         </div>
+    //     )
+    // }
 }
-
-
-
-export default AndreyInputsEmail
+export default PhoneName;

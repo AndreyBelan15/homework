@@ -59,7 +59,7 @@ class AndreyInputsPassword extends React.Component {
 
 
     render() {
-            let err = 'Правильно'
+            let err = 'Обрати внимание'
             if(!this.state.isValid){
                 err = (
 
