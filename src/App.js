@@ -5,9 +5,10 @@ import {Routes, Route, BrowserRouter, Link} from "react-router-dom";
 import PageHome from "./pages/Home";
 import PageAbout from "./pages/About";
 import PageError from "./pages/Error";
+import PageKino from "./pages/Kino";
 import Main from "./components/Nav/Main";
 import PageMyContacts from "./pages/MyContacts";
-import PageKino from "./pages/Kino";
+
 
 
 
@@ -25,8 +26,11 @@ function App() {
                 <Routes>
                     <Route path="/" element={<PageHome />} />
                     <Route path="/about" element={<PageAbout />} />
-                    <Route path="/kinohome" element={<PageKino />} />
-                    <Route path="/users" element={<PageMyContacts />} />
+                    <Route path="/films" element={<PageKino />} />
+                    <Route path="/contacts" element={<PageMyContacts />} />
+
+
+
                     <Route path="*" element={<PageError />} />
 
                 </Routes>
