@@ -6,7 +6,7 @@ class NinyFooter extends React.Component {
 
     render() {
         return(
-            <footer>&copy 2022 IT Step Academy</footer>
+            <footer>2022 Nikolaev-the best City</footer>
         )
     }
 }

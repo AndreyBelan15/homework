@@ -10,6 +10,9 @@ class Main extends React.Component{
             <>
                 <Link to="/">Home</Link>
                 <Link to="/about">About</Link>
+                <Link to="/KinoKradHome">Cinema</Link>
+                <Link to="/Contact">Users</Link>
+
             </>
         )
     }

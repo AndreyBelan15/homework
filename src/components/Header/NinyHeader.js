@@ -7,7 +7,7 @@ class NinyHeader extends React.Component {
     render() {
         return(
             <header>
-                <h1>Список ненужных людей</h1>
+                <h1>Добро пожаловать</h1>
 
             </header>
         )

@@ -2,7 +2,7 @@ import React from "react";
 import KinoKradHome from "../components/Kinokrad/KinokradHome";
 
 
-class PageAbout extends React.Component{
+class PageKino extends React.Component{
 
 
     render() {
@@ -13,4 +13,4 @@ class PageAbout extends React.Component{
         )
     }
 }
-export default PageAbout
+export default PageKino

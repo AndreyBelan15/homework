@@ -1,33 +1,39 @@
-body{
-    background: aqua;
-}
-h1{
-    font-style: italic;
-}
+/*body{*/
+/*    !*background: aqua;*!*/
+/*    background-image: url("../img/images.jfif");*/
+/*    background-repeat: no-repeat;*/
+/*    background-size: cover;*/
+/*}*/
+/*h1{*/
+/*    font-style: italic;*/
+/*}*/
 
-.App {
-    background: darkkhaki;
-}
-input{
-    display: block;
-    border-radius: 20%;
-    border: 3px solid red;
-}
-input:hover{
-    cursor: progress;
-}
-label{
-    font-style: oblique;
-}
-li::marker{
-    color: mediumblue;
-}
-#btnCreate{
-    margin-top: 20px;
-    background: black;
-    border-radius: 20%;
-}
-.modal-content{
-    border: 5px solid yellow;
-    border-radius: 15%;
-}
+/*.App {*/
+/*    background: darkkhaki;*/
+/*    !*background-image: url("../img/images.jfif");*!*/
+/*    !*background-repeat: no-repeat;*!*/
+/*    !*background-size: cover;*!*/
+/*}*/
+/*input{*/
+/*    display: block;*/
+/*    border-radius: 20%;*/
+/*    border: 3px solid red;*/
+/*}*/
+/*input:hover{*/
+/*    cursor: progress;*/
+/*}*/
+/*label{*/
+/*    font-style: oblique;*/
+/*}*/
+/*li::marker{*/
+/*    color: mediumblue;*/
+/*}*/
+/*#btnCreate{*/
+/*    margin-top: 20px;*/
+/*    background: black;*/
+/*    border-radius: 20%;*/
+/*}*/
+/*.modal-content{*/
+/*    border: 5px solid yellow;*/
+/*    border-radius: 15%;*/
+/*}*/

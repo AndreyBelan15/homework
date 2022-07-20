@@ -6,6 +6,9 @@ import PageHome from "./pages/Home";
 import PageAbout from "./pages/About";
 import PageError from "./pages/Error";
 import Main from "./components/Nav/Main";
+import PageMyContacts from "./pages/MyContacts";
+import PageKino from "./pages/Kino";
+
 
 
 function App() {
@@ -22,7 +25,10 @@ function App() {
                 <Routes>
                     <Route path="/" element={<PageHome />} />
                     <Route path="/about" element={<PageAbout />} />
+                    <Route path="/kinohome" element={<PageKino />} />
+                    <Route path="/users" element={<PageMyContacts />} />
                     <Route path="*" element={<PageError />} />
+
                 </Routes>
 
                 {/*<ContactPhone></ContactPhone>*/}
