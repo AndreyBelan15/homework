@@ -8,40 +8,38 @@ import PageError from "./pages/Error";
 import PageKino from "./pages/Kino";
 import Main from "./components/Nav/Main";
 import PageMyContacts from "./pages/MyContacts";
-
-
+import PageImg from "./pages/Img";
 
 
 function App() {
 
-    return (
+  return (
 
-        <BrowserRouter>
+    <BrowserRouter>
 
-        <div className="App">
-            <div className="App container">
-                <NinyHeader></NinyHeader>
-                <Main></Main>
+      <div className="App">
+        <div className="App container">
+          <NinyHeader></NinyHeader>
+          <Main></Main>
 
-                <Routes>
-                    <Route path="/" element={<PageHome />} />
-                    <Route path="/about" element={<PageAbout />} />
-                    <Route path="/films" element={<PageKino />} />
-                    <Route path="/contacts" element={<PageMyContacts />} />
+          <Routes>
+            <Route path="/" element={<PageHome/>}/>
+            <Route path="/about" element={<PageAbout/>}/>
+            <Route path="/films" element={<PageKino/>}/>
+            <Route path="/contacts" element={<PageMyContacts/>}/>
+            {/*<Route path="/foto" element={<PageImg/>}/>*/}
 
+            <Route path="*" element={<PageError/>}/>
 
+          </Routes>
 
-                    <Route path="*" element={<PageError />} />
+          {/*<ContactPhone></ContactPhone>*/}
+          <NinyFooter></NinyFooter>
 
-                </Routes>
-
-                {/*<ContactPhone></ContactPhone>*/}
-                <NinyFooter></NinyFooter>
-
-            </div>
         </div>
-        </BrowserRouter>
-    );
+      </div>
+    </BrowserRouter>
+  );
 }
 
 export default App

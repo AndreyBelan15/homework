@@ -2,15 +2,16 @@ import React from "react";
 import KinoKradHome from "../components/Kinokrad/KinokradHome";
 
 
-class PageAbout extends React.Component{
+class PageAbout extends React.Component {
 
 
-    render() {
-        return(
-            <>
-                <KinoKradHome></KinoKradHome>
-            </>
-        )
-    }
+  render() {
+    return (
+      <>
+        Мучение и боль
+      </>
+    )
+  }
 }
+
 export default PageAbout

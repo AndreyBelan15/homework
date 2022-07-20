@@ -1,8 +1,8 @@
 /*body{*/
-/*    !*background: aqua;*!*/
-/*    background-image: url("../img/images.jfif");*/
-/*    background-repeat: no-repeat;*/
-/*    background-size: cover;*/
+/*    background: aqua;*/
+/*    !*background-image: url("../Foto/images.jfif");*!*/
+/*    !*background-repeat: no-repeat;*!*/
+/*    !*background-size: cover;*!*/
 /*}*/
 /*h1{*/
 /*    font-style: italic;*/
@@ -10,7 +10,7 @@
 
 /*.App {*/
 /*    background: darkkhaki;*/
-/*    !*background-image: url("../img/images.jfif");*!*/
+/*    !*background-image: url("../Foto/images.jfif");*!*/
 /*    !*background-repeat: no-repeat;*!*/
 /*    !*background-size: cover;*!*/
 /*}*/
